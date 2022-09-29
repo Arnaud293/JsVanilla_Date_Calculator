@@ -27,3 +27,24 @@ start_date.addEventListener('change', (e) => {
     }
 })
 
+end_date.addEventListener('change', (e) => {
+    let day = new Date(e.target.value);
+
+    if(end_date.value <= start_date.value){
+    day.setDate(day.getDate() - 1);
+    start_date.value = day.toISOString().split('T')[0];
+    }
+})
+
+const bookingPricing = () => { 
+    let diffTime = Math.abs(new Date(end_date.value) - new Date(start_date.value));
+    let diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    
+    total.textContent = diffDays * nightPrice.textContent;
+}
+
+
+start_date.addEventListener('change', bookingPricing);
+end_date.addEventListener('change', bookingPricing);
+
+bookingPricing();

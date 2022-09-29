@@ -17,3 +17,13 @@ const tomorrowDate = tomorrow.toISOString().split('T')[0];
 end_date.value = tomorrowDate;
 end_date.min = tomorrowDate;
 
+start_date.addEventListener('change', (e) => {
+    let day = new Date(e.target.value);
+
+    if (end_date.value <= start_date.value){
+        day.setDate(day.getDate() + 1);
+        let tomorrowDate = day.toISOString().split('T')[0];
+        end_date.value = tomorrowDate;
+    }
+})
+
